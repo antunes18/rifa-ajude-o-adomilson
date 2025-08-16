@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rifa para Ajudar o Adomilson - Recuperação após Acidente</title>
+
+    <!-- Meta tags para compartilhamento -->
+    <meta name="description"
+        content="Participe da campanha solidária para ajudar o Adomilson em sua recuperação após grave acidente. Compre números de 1 a 100 e concorra a R$200!">
+    <meta name="keywords" content="solidariedade, ajuda, acidente, motoboy, Goianésia, Adomilson, rifa">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ajudamotoboy.com/adomilson">
+    <meta property="og:title" content="Ajude o Adomilson - Recuperação após Acidente">
+    <meta property="og:description"
+        content="Participe da campanha solidária para ajudar Adomilson em sua recuperação após grave acidente. Compre números de 1 a 100 e concorra a R$200!">
+    <meta property="og:image" content="https://exemplo.com/caminho/para/imagem.jpg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2C7A7B',   // Verde confiança
+                        secondary: '#ED8936', // Laranja ação
+                        accent: '#B83280',    // Rosa empatia
+                        light: '#F7FAFC',     // Fundo claro
+                        dark: '#1A202C'       // Texto escuro
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Alpine.js -->
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #F7FAFC;
+            color: #1A202C;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .number-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 0.5rem;
+        }
+
+        .number-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .number-item:hover {
+            transform: scale(1.05);
+        }
+
+        .available {
+            background-color: #2C7A7B;
+            color: white;
+        }
+
+        .reserved {
+            background-color: #ED8936;
+            color: white;
+        }
+
+        .sold {
+            background-color: #718096;
+            color: white;
+        }
+
+        .heartbeat {
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+
+<body x-data="app()" x-init="init()">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-primary to-secondary text-white py-6 shadow-lg relative">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl md:text-4xl font-bold">Ajude o Adomilson</h1>
+                    <p class="text-light">Recuperação após acidente de moto</p>
+                </div>
+                <div class="bg-white text-primary py-1 px-3 rounded-full text-sm font-bold shadow-md">
+                    <i class="fas fa-lock mr-1"></i> Transparência total
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-12 bg-light">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-4 text-dark">Sua ajuda é fundamental para a recuperação
+                        do Adomilson!</h2>
+                    <p class="text-xl mb-6 text-gray-700">Adomilson, um jovem trabalhador de Goianésia, sofreu um grave
+                        acidente de moto enquanto trabalhava como motoboy. Ele precisa urgentemente da nossa
+                        solidariedade para cobrir os custos médicos e de recuperação.</p>
+                    <div class="bg-white p-6 rounded-lg shadow-lg mb-6">
+                        <p class="text-lg font-semibold mb-2"><i
+                                class="fas fa-bullhorn text-secondary mr-2"></i>Participe da nossa campanha solidária:
+                        </p>
+                        <ul class="list-disc pl-6 text-gray-700">
+                            <li>Compre um ou mais números de 1 a 100 por apenas R$20,00 cada</li>
+                            <li>Todo valor arrecadado será destinado ao tratamento do Adomilson</li>
+                            <li>Ao final, um número será sorteado como forma de agradecimento</li>
+                        </ul>
+                    </div>
+                    <div class="bg-accent text-white p-4 rounded-lg shadow-lg flex items-center">
+                        <i class="fas fa-exclamation-triangle text-3xl mr-4"></i>
+                        <p class="text-lg">Tempo é crucial! Cada minuto conta para a recuperação do Adomilson.</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                    <div class="bg-white p-8 rounded-xl shadow-xl max-w-md w-full">
+                        <h3 class="text-2xl font-bold mb-4 text-center text-primary">Como ajudar</h3>
+
+                        <div class="mb-6">
+                            <div class="flex items-center mb-4">
+                                <div
+                                    class="bg-secondary rounded-full h-12 w-12 flex items-center justify-center text-white mr-4">
+                                    <span>1</span>
+                                </div>
+                                <p class="text-lg">Escolha um ou mais números disponíveis</p>
+                            </div>
+
+                            <div class="flex items-center mb-4">
+                                <div
+                                    class="bg-secondary rounded-full h-12 w-12 flex items-center justify-center text-white mr-4">
+                                    <span>2</span>
+                                </div>
+                                <p class="text-lg">Faça o pagamento via PIX ou dinheiro</p>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div
+                                    class="bg-secondary rounded-full h-12 w-12 flex items-center justify-center text-white mr-4">
+                                    <span>3</span>
+                                </div>
+                                <p class="text-lg">Envie o comprovante para a Elaine</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-primary text-white p-4 rounded-lg mb-4">
+                            <p class="text-center font-semibold">
+                                <i class="fas fa-money-bill-wave mr-2"></i>Chave PIX para pagamento:
+                            </p>
+                            <p class="text-center text-xl font-bold mt-2">613.284.991-20 (CPF)</p>
+                            <p class="text-center text-sm mt-1">Titular: Adomilson Candido da Costa Lopes</p>
+                        </div>
+
+                        <div class="bg-primary text-white p-4 rounded-lg mb-6">
+                            <p class="text-center font-semibold"><i class="fas fa-whatsapp mr-2"></i>Contato oficial:
+                                Elaine (62) 98435-3720</p>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-xl font-bold mb-2">Progresso da Campanha</p>
+                            <div class="w-full bg-gray-200 rounded-full h-4 mb-2">
+                                <div class="bg-secondary h-4 rounded-full"
+                                    :style="`width: ${(soldNumbers.length / 100) * 100}%`"></div>
+                            </div>
+                            <p class="text-gray-700"><span class="font-bold text-primary text-xl"
+                                    x-text="soldNumbers.length"></span> números vendidos de 100</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Numbers Grid -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-4 text-dark" data-aos="fade-up">Escolha seu número</h2>
+            <p class="text-center text-gray-700 mb-8 max-w-2xl mx-auto" data-aos="fade-up">Cada número custa R$20,00.
+                Clique em um número disponível para reservar. Após o pagamento, envie o comprovante para a Elaine.</p>
+
+            <div class="bg-light p-6 rounded-xl shadow-inner mb-8">
+                <div class="flex justify-center gap-4 mb-6">
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 bg-primary rounded mr-2"></div>
+                        <span>Disponível</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 bg-secondary rounded mr-2"></div>
+                        <span>Reservado</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-6 h-6 bg-gray-500 rounded mr-2"></div>
+                        <span>Vendido</span>
+                    </div>
+                </div>
+
+                <div class="number-grid" data-aos="zoom-in">
+                    <template x-for="number in numbers">
+                        <div :class="{
+                                'available': number.status === 'available',
+                                'reserved': number.status === 'reserved',
+                                'sold': number.status === 'sold'
+                            }"
+                            class="number-item rounded-lg flex items-center justify-center aspect-square font-bold text-lg shadow-md"
+                            @click="toggleStatus(number)">
+                            <span x-text="number.value"></span>
+                        </div>
+                    </template>
+                </div>
+            </div>
+
+            <div class="text-center mt-8">
+                <p class="text-xl font-semibold mb-4">Total selecionado: <span class="text-primary text-2xl"
+                        x-text="selectedNumbersCount"></span> números</p>
+                <p class="text-xl font-semibold mb-4">Valor total: <span class="text-primary text-2xl">R$ <span
+                            x-text="selectedNumbersCount * 20"></span>,00</span></p>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6 rounded-md max-w-2xl mx-auto">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-info-circle text-yellow-400 text-xl mt-1 mr-3"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-700">
+                                <strong>Instruções de pagamento:</strong><br>
+                                1. Faça o PIX para <strong>613.284.991-20 (CPF)</strong><br>
+                                2. Envie o comprovante para a Elaine via WhatsApp<br>
+                                3. Seu número será confirmado após verificação
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <a :href="`https://wa.me/5562984353720?text=${encodeURIComponent(whatsappMessage)}`"
+                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full shadow-lg transform transition hover:scale-105 duration-300 inline-flex items-center"
+                    target="_blank">
+                    <i class="fab fa-whatsapp text-2xl mr-3"></i>
+                    Enviar comprovante via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Premiação Section -->
+    <section class="py-12 bg-gradient-to-r from-secondary to-accent text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 mb-8 md:mb-0 text-center md:text-left" data-aos="fade-right">
+                    <h2 class="text-3xl font-bold mb-4">Além de ajudar, você pode ganhar!</h2>
+                    <p class="text-xl mb-6">Como forma de agradecimento pela sua solidariedade, um número será sorteado
+                        quando todos os 100 forem vendidos!</p>
+                    <div class="bg-white bg-opacity-20 p-6 rounded-xl inline-block">
+                        <p class="text-5xl font-bold">R$ 200,00</p>
+                        <p class="text-lg mt-2">em dinheiro para o ganhador!</p>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center" data-aos="fade-left">
+                    <div class="bg-white text-dark p-8 rounded-xl shadow-xl max-w-md w-full">
+                        <h3 class="text-2xl font-bold mb-4 text-center">Como funciona</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div
+                                    class="bg-primary rounded-full h-8 w-8 flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <span>1</span>
+                                </div>
+                                <p>Você compra um ou mais números por R$20,00 cada</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div
+                                    class="bg-primary rounded-full h-8 w-8 flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <span>2</span>
+                                </div>
+                                <p>O sorteio será realizado dia 20/09 (vinte de setembro)</p>
+                            </li>
+                            <li class="flex items-start">
+                                <div
+                                    class="bg-primary rounded-full h-8 w-8 flex items-center justify-center text-white mr-4 flex-shrink-0">
+                                    <span>3</span>
+                                </div>
+                                <p>O ganhador recebe R$200,00 como agradecimento por ajudar</p>
+                            </li>
+                        </ul>
+                        <div class="mt-6 text-center">
+                            <p class="text-lg font-semibold">Ajude o Adomilson e concorra!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="py-12 bg-gradient-to-br from-primary to-secondary text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto" data-aos="fade-up">
+                <h2 class="text-3xl font-bold mb-6 text-center">A História do Adomilson</h2>
+                <div class="bg-white bg-opacity-20 p-6 md:p-8 rounded-xl shadow-lg">
+                    <div class="flex flex-col md:flex-row items-center gap-6 mb-6">
+                        <div class="md:w-1/2">
+                            <p class="text-lg mb-4">Adomilson é um jovem adulto trabalhador de Goianésia, Goiás.
+                                Trabalhava como motoboy/office boy quando sofreu um acidente de trânsito enquanto
+                                estava trabalhando.</p>
+                            <p class="text-lg mb-4">Como não pode trabalhar durante a recuperação, precisa da nossa
+                                ajuda para cobrir suas despesas médicas e de sustento.</p>
+                        </div>
+                        <div class="md:w-1/2">
+                            <img src="./perna_do_adomilson.jpeg" alt="Ferimento no pé do Adomilson após o acidente"
+                                class="w-full h-auto rounded-lg shadow-md floating" data-aos="zoom-in">
+                            <p class="text-sm text-center text-white text-opacity-80 mt-2">Ferimento no pé do Adomilson
+                                após o acidente</p>
+                        </div>
+                    </div>
+                    <p class="text-lg font-semibold text-center">Com sua colaboração, podemos aliviar o fardo financeiro
+                        e permitir que Adomilson se concentre apenas em sua recuperação.</p>
+                </div>
+                <div class="mt-8 text-center">
+                    <i class="fas fa-hands-helping text-5xl mb-4"></i>
+                    <p class="text-xl font-bold">Sua solidariedade pode transformar vidas!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transparência Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-8 text-dark" data-aos="fade-up">Total Transparência</h2>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-light p-6 rounded-xl shadow-md" data-aos="fade-right">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-money-bill-wave text-4xl text-primary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Destino dos Recursos</h3>
+                    <p class="text-gray-700 text-center">Todo o valor arrecadado será transferido diretamente para
+                        Adomilson para cobrir:</p>
+                    <ul class="list-disc pl-6 mt-4 text-gray-700">
+                        <li>Despesas médicas e hospitalares</li>
+                        <li>Medicamentos e tratamentos</li>
+                        <li>Custos de recuperação e reabilitação</li>
+                        <li>Despesas básicas durante o período sem trabalho</li>
+                    </ul>
+                </div>
+
+                <div class="bg-light p-6 rounded-xl shadow-md" data-aos="fade-left">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-hand-holding-usd text-4xl text-secondary"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-center">Como Funciona o PIX</h3>
+                    <p class="text-gray-700 text-center mb-4">Pagamentos direto para Adomilson:</p>
+                    <div class="bg-white p-4 rounded-lg border border-primary">
+                        <p class="text-center font-bold text-primary">Chave PIX: 613.284.991-20 (CPF)</p>
+                        <p class="text-center font-bold text-primary">Titular: Adomilson Candido da Costa Lopes</p>
+                        <p class="text-center font-bold text-primary">BANCO BRADESCO</p>
+                    </div>
+                    <p class="text-gray-700 mt-4 text-center">Elaine apenas gerencia as vendas e confirma os números
+                        após receber seu comprovante.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-8 text-dark" data-aos="fade-up">Perguntas Frequentes</h2>
+
+            <div class="space-y-4">
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden" data-aos="fade-up">
+                    <button
+                        class="w-full p-4 text-left font-semibold bg-light hover:bg-gray-100 flex justify-between items-center"
+                        @click="toggleFAQ(1)">
+                        <span>Para quem devo fazer o pagamento PIX?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"
+                            :class="{'rotate-180': openFAQ === 1}"></i>
+                    </button>
+                    <div class="p-4 bg-white" x-show="openFAQ === 1">
+                        <p>Todos os pagamentos devem ser feitos via PIX para a chave <strong>613.284.991-20
+                                (CPF)</strong> em nome de Adomilson. A Elaine é apenas a responsável por receber os
+                            comprovantes e gerenciar as vendas.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden" data-aos="fade-up">
+                    <button
+                        class="w-full p-4 text-left font-semibold bg-light hover:bg-gray-100 flex justify-between items-center"
+                        @click="toggleFAQ(2)">
+                        <span>Qual o valor do prêmio e como será pago?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"
+                            :class="{'rotate-180': openFAQ === 2}"></i>
+                    </button>
+                    <div class="p-4 bg-white" x-show="openFAQ === 2">
+                        <p>O prêmio para o ganhador é de R$200,00 em dinheiro. O pagamento será feito via PIX assim que
+                            o sorteio for realizado e o(a) ganhador(a) confirmado(a).</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden" data-aos="fade-up">
+                    <button
+                        class="w-full p-4 text-left font-semibold bg-light hover:bg-gray-100 flex justify-between items-center"
+                        @click="toggleFAQ(3)">
+                        <span>Como funciona a compra dos números?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"
+                            :class="{'rotate-180': openFAQ === 3}"></i>
+                    </button>
+                    <div class="p-4 bg-white" x-show="openFAQ === 3">
+                        <p>Você escolhe um ou mais números disponíveis, faz o pagamento de R$20,00 por número via PIX ou
+                            dinheiro e envia o comprovante para a Elaine pelo WhatsApp (62 98435-3720). Após
+                            confirmação, seu número será marcado como vendido.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden" data-aos="fade-up">
+                    <button
+                        class="w-full p-4 text-left font-semibold bg-light hover:bg-gray-100 flex justify-between items-center"
+                        @click="toggleFAQ(4)">
+                        <span>Quando será o sorteio?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"
+                            :class="{'rotate-180': openFAQ === 4}"></i>
+                    </button>
+                    <div class="p-4 bg-white" x-show="openFAQ === 4">
+                        <p>O sorteio será realizado dia 20 de setembro (20/09). O ganhador receberá um
+                            prêmio simbólico como agradecimento por participar da campanha solidária.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden" data-aos="fade-up">
+                    <button
+                        class="w-full p-4 text-left font-semibold bg-light hover:bg-gray-100 flex justify-between items-center"
+                        @click="toggleFAQ(5)">
+                        <span>Como posso ter certeza que meu dinheiro será usado para ajudar?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"
+                            :class="{'rotate-180': openFAQ === 5}"></i>
+                    </button>
+                    <div class="p-4 bg-white" x-show="openFAQ === 5">
+                        <p>Toda a arrecadação será destinada exclusivamente aos custos médicos e de recuperação do
+                            Adomilson. Estamos disponíveis para prestar esclarecimentos e mostrar comprovantes de gastos
+                            médicos a qualquer momento.</p>
+                    </div>
+                </div>
+
+                <div class="border border-gray-200 rounded-lg overflow-hidden" data-aos="fade-up">
+                    <button
+                        class="w-full p-4 text-left font-semibold bg-light hover:bg-gray-100 flex justify-between items-center"
+                        @click="toggleFAQ(6)">
+                        <span>Posso comprar mais de um número?</span>
+                        <i class="fas fa-chevron-down transition-transform duration-300"
+                            :class="{'rotate-180': openFAQ === 6}"></i>
+                    </button>
+                    <div class="p-4 bg-white" x-show="openFAQ === 6">
+                        <p>Sim, você pode comprar quantos números quiser, desde que estejam disponíveis. Cada número
+                            custa R$20,00.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                <div class="text-center md:text-left">
+                    <h3 class="text-2xl font-bold mb-2">Ajude o Adomilson</h3>
+                    <p class="text-gray-400">Campanha solidária para arrecadar fundos para tratamento médico</p>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-lg font-semibold mb-2">Chave PIX para pagamento:</p>
+                    <p class="text-gray-400 text-xl">613.284.991-20 (CPF), BANCO BRADESCO</p>
+                    <p class="text-gray-400">Titular: Adomilson Candido da Costa Lopes</p>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-lg font-semibold mb-2">Contato oficial</p>
+                    <p class="text-gray-400">Elaine, (62) 98435-3720</p>
+                    <a :href="`https://wa.me/5562984353720?text=${encodeURIComponent(whatsappMessage)}`"
+                        class="mt-4 inline-block bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg transform transition hover:scale-105 duration-300">
+                        <i class="fab fa-whatsapp mr-2"></i> Enviar comprovante
+                    </a>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>© 2023 Campanha Solidária Adomilson. Todos os valores arrecadados serão destinados ao tratamento
+                    médico.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Initialization -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                easing: 'ease-in-out',
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('app', () => ({
+                numbers: [],
+                openFAQ: 0,
+
+                init() {
+                    // Initialize numbers from 1 to 100
+                    this.numbers = Array.from({ length: 100 }, (_, i) => ({
+                        value: i + 1,
+                        status: 'available'
+                    }));
+
+                    // Try to load saved state
+                    const savedNumbers = localStorage.getItem('savedNumbers');
+                    if (savedNumbers) {
+                        this.numbers = JSON.parse(savedNumbers);
+                    }
+                },
+
+                toggleStatus(number) {
+                    const statusOrder = ['available', 'reserved', 'sold', 'available'];
+                    const currentIndex = statusOrder.indexOf(number.status);
+                    number.status = statusOrder[(currentIndex + 1) % statusOrder.length];
+
+                    // Save to localStorage
+                    localStorage.setItem('savedNumbers', JSON.stringify(this.numbers));
+                },
+
+                toggleFAQ(id) {
+                    this.openFAQ = this.openFAQ === id ? 0 : id;
+                },
+
+                get selectedNumbersCount() {
+                    return this.numbers.filter(n => n.status === 'reserved').length;
+                },
+
+                get soldNumbers() {
+                    return this.numbers.filter(n => n.status === 'sold');
+                },
+
+                get selectedNumbers() {
+                    return this.numbers.filter(n => n.status === 'reserved').map(n => n.value);
+                },
+
+                get whatsappMessage() {
+                    const numbers = this.selectedNumbers.join(', ');
+                    return `Olá Elaine, acabei de comprar os números: ${numbers} e irei enviar o comprovante de pagamento agora.`;
+                }
+            }));
+        });
+    </script>
+</body>
+
+</html>
